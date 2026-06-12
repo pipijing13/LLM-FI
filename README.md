@@ -2,6 +2,12 @@
 
 **PyTorch 2.5**, other required packages are shown in requirements.txt
 
+## Installation:
+python -m pip install torch ==2.5.0+ cu118 torchvision torchaudio -- index - url https :// download . pytorch . org / whl / cu118
+
+pip install -r requirements.txt
+
+
 ## Command example:
 ```bash
 python multichoiceFI.py –fault_mode neuron –model qwen –num_trials 1000
