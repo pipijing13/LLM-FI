@@ -3,6 +3,8 @@
 **PyTorch 2.5**, other required packages are shown in requirements.txt
 
 ## Installation:
+git clone https://github.com/pipijing13/LLM-FI.git
+
 python -m pip install torch==2.5.0+cu118 torchvision torchaudio --index -url https://download.pytorch.org/whl/cu118
 
 pip install -r requirements.txt
