@@ -78,6 +78,8 @@ Model name reference:
 `qwen` = Qwen2.5-7B-Instruct, `llama3` = Llama-3.1-8B-Instruct, `falcon` = Falcon3-7B-Instruct,
 `llama2` = Llama2-7B, `alma` = ALMA-7B, `summarizer` = Llama-3.1-8B-Summarizer.
 
+For the CPU version example, we use Qwen2.5-0.5B-Instruct model, and there is no model selection.
+
 For the multiple-choice script, `--task` selects the benchmark:
 `mmlu` (tinyMMLU), `arc` (tinyArc / AI2_ARC), `hella` (tinyHellaSwag), `wino` (tinyWinoGrande),
 `truth` (tinyTruthfulQA).
