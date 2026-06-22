@@ -13,7 +13,6 @@ colorama==0.4.6
 DataProperty==1.1.0
 datasets==3.3.2
 dill==0.3.8
-entmax==1.3
 evaluate==0.4.3
 filelock==3.13.1
 frozenlist==1.5.0
@@ -22,9 +21,7 @@ huggingface-hub==0.29.2
 idna==3.10
 Jinja2==3.1.4
 joblib==1.4.2
-jsonargparse==3.13.1
 jsonlines==4.0.0
-lightning-utilities==0.14.2
 -e git+https://github.com/EleutherAI/lm-evaluation-harness@4890e881031a8ff00fd3136f938c4cf1ae101de4#egg=lm_eval
 lxml==5.3.1
 MarkupSafe==2.1.5
@@ -51,7 +48,6 @@ pybind11==2.13.6
 pycryptodomex==3.22.0
 pytablewriter==1.2.1
 python-dateutil==2.9.0.post0
-pytorch-lightning==2.5.1
 pytz==2025.1
 PyYAML==6.0.2
 regex==2024.11.6
@@ -78,7 +74,6 @@ transformers==4.49.0
 typepy==1.3.4
 typing_extensions==4.12.2
 tzdata==2025.1
-unbabel-comet==2.2.4
 urllib3==2.3.0
 word2number==1.1
 xxhash==3.5.0
