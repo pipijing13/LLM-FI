@@ -10,6 +10,11 @@ Repository: https://github.com/pipijing13/LLM-FI
 
 ## Setup (10 min)
 
+```
+python -m venv llmfi
+source llmfi/bin/activate
+```
+
 Clone the repository:
 
 ```
@@ -17,7 +22,7 @@ git clone https://github.com/pipijing13/LLM-FI.git
 cd LLM-FI
 ```
 
-We provide both a GPU and a CPU version. Pick the one that matches your hardware.
+We provide both a GPU and a CPU (with smaller model, Qwen2.5-0.5B-Instruct) version. Pick the one that matches your hardware.
 
 | Version | GPU memory | System memory | Disk space |
 |---------|-----------|---------------|------------|
@@ -167,8 +172,8 @@ two fault classes:
 
 | `--fault_mode` | Fault class | Description |
 |----------------|-------------|-------------|
-| `single` | Computational | Single-bit flip on a neuron output |
-| `neuron` | Computational | Double-bit flip on a neuron output |
+| `single` | Computational | Single-bit flip on a neuron |
+| `neuron` | Computational | Double-bit flip on a neuron |
 | `weight` | Memory | Double-bit flip on a model weight |
 
 Run the same task under different fault modes to compare resilience:
@@ -235,9 +240,8 @@ python moemmluFI.py   --num_trials 1000
 
 As a final step, it helps to see *how* a generation goes wrong, not just whether accuracy
 dropped. The `trace/` directory analyzes pre-collected GSM8K traces and classifies each
-faulty generation by output type (e.g. the result changed, or the model fell into an
-infinite loop) across the three fault models, for Falcon3-7B and Qwen2.5-7B. It runs on
-bundled traces, so no GPU is needed and there are no flags to set.
+faulty generation by output type (e.g. the subtly wrong outputs, or the distorted outputs) across the three fault models, for Falcon3-7B and Qwen2.5-7B. It runs on
+bundled traces, so no GPU is needed.
 
 ```
 cd trace
@@ -246,9 +250,9 @@ python trace_analyze.py
 
 The script writes two artifacts:
 
-* `figs/output_type.pdf` — bar chart of output types per model and fault model
 * `output_type.txt` — text summary (percentage of generations whose result changed vs.
   fell into an infinite loop)
+* `figs/output_type.pdf` — bar chart of output types per model and fault model
 
 ```
 cat output_type.txt
