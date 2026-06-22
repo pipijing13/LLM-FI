@@ -246,6 +246,7 @@ bundled traces, so no GPU is needed.
 
 ```
 cd trace
+pip install matplotlib
 python trace_analyze.py
 ```
 
