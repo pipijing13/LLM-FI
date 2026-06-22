@@ -122,7 +122,7 @@ summary to the console.
    **GPU version:**
    ```
    cd basic
-   python multichoiceFI.py --fault_mode neuron --task mmlu --model qwen --num_trials 2
+   python multichoiceFI.py --fault_mode neuron --task mmlu --model qwen --num_trials 5
    ```
 
    **CPU version:**
@@ -151,7 +151,7 @@ summary to the console.
 
    **GPU version:**
    ```
-   python gsm8kFI.py --fault_mode weight --model qwen --num_trials 2
+   python gsm8kFI.py --fault_mode weight --model qwen --num_trials 5
    ```
 
    **CPU version:**
