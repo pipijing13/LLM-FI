@@ -27,7 +27,7 @@ We provide both a GPU and a CPU (with smaller model, Qwen2.5-0.5B-Instruct) vers
 | Version | GPU memory | System memory | Disk space |
 |---------|-----------|---------------|------------|
 | **GPU** | 20 GB     | 8 GB          | 30 GB      |
-| **CPU** | —         | 4 GB          | 10 GB      |
+| **CPU** | —         | 8 GB          | 10 GB      |
 
 
 ### GPU version
