@@ -165,7 +165,7 @@ summary to the console.
 
 ---
 
-## Part 3: Fault Models (2 min)
+## Part 3: Fault Models (5 min)
 
 The `--fault_mode` flag selects how and where faults are injected. The three modes map onto
 two fault classes:
@@ -236,7 +236,7 @@ python moemmluFI.py   --num_trials 1000
 
 ---
 
-## Part 7: Trace Analysis — Output Types (3 min)
+## Part 7: Trace Analysis — Output Types (5 min)
 
 As a final step, it helps to see *how* a generation goes wrong, not just whether accuracy
 dropped. The `trace/` directory analyzes pre-collected GSM8K traces and classifies each
