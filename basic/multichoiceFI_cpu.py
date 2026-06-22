@@ -29,33 +29,33 @@ seed_torch()
 def perform_bit_flip_weight(tensor, bit_position):
     """Perform double-bit flip on weight tensor elements."""
     with torch.no_grad():
-        tensor_bf16 = tensor.to(torch.bfloat16)
-        bits = tensor_bf16.view(torch.int16)
+        tensor_fp32 = tensor.to(torch.float32)
+        bits = tensor_fp32.view(torch.int32)
         mask = (1 << bit_position[0]) | (1 << bit_position[1])
         bits = bits ^ mask
-        flipped_tensor = bits.view(torch.bfloat16)
+        flipped_tensor = bits.view(torch.float32)
     return flipped_tensor
 
 
 def perform_bit_flip_neuron(tensor, bit_position):
     """Perform double-bit flip on neuron output elements."""
     with torch.no_grad():
-        tensor_bf16 = tensor.to(torch.bfloat16)
-        bits = tensor_bf16.view(torch.int16)
+        tensor_fp32 = tensor.to(torch.float32)
+        bits = tensor_fp32.view(torch.int32)
         mask = (1 << bit_position[0]) | (1 << bit_position[1])
         bits = bits ^ mask
-        flipped_tensor = bits.view(torch.bfloat16)
+        flipped_tensor = bits.view(torch.float32)
     return flipped_tensor
 
 
 def perform_bit_flip_single(tensor, bit_position):
     """Perform single-bit flip on neuron output elements."""
     with torch.no_grad():
-        tensor_bf16 = tensor.to(torch.bfloat16)
-        bits = tensor_bf16.view(torch.int16)
+        tensor_fp32 = tensor.to(torch.float32)
+        bits = tensor_fp32.view(torch.int32)
         mask = (1 << bit_position)
         bits = bits ^ mask
-        flipped_tensor = bits.view(torch.bfloat16)
+        flipped_tensor = bits.view(torch.float32)
     return flipped_tensor
 
 
@@ -177,7 +177,7 @@ def main():
     print("Loading model...")
     model = lm_eval.models.huggingface.HFLM(
         pretrained=model_name,
-        dtype=torch.bfloat16,
+        dtype=torch.float32,
         device=device,
     )
     print(f"Model dtype: {next(model.model.parameters()).dtype}")
@@ -245,7 +245,7 @@ def main():
         if args.fault_mode == 'weight':
             x = random.randint(0, weight_tensor.shape[0] - 1)
             y = random.randint(0, weight_tensor.shape[1] - 1)
-            bit_position = random.sample(range(16), 2)
+            bit_position = random.sample(range(32), 2)
             original_value = weight_tensor[x, y].item()
             with torch.no_grad():
                 weight_tensor[x, y] = perform_bit_flip_weight(weight_tensor[x, y], bit_position)
@@ -254,9 +254,9 @@ def main():
             y = random.randint(0, weight_tensor.shape[0] - 1)
             x = random.randint(0, min_seq_len - 1)
             if args.fault_mode == 'neuron':
-                bit_position = random.sample(range(16), 2)
+                bit_position = random.sample(range(32), 2)
             else:
-                bit_position = random.randint(0, 15)
+                bit_position = random.randint(0, 31)
             token_position = random.randint(0, min_seq_len - 1)
             hook = create_output_hook(current_module, bit_position, (x, y), token_position, args.fault_mode)
             hook_handle = current_module.register_forward_hook(hook)

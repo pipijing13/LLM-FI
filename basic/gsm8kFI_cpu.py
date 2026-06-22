@@ -89,33 +89,33 @@ class PeakMemoryTracker:
 def perform_bit_flip_weight(tensor, bit_position):
     """Flip two bits of a weight tensor element."""
     with torch.no_grad():
-        tensor_bf16 = tensor.to(torch.bfloat16)
-        bits = tensor_bf16.view(torch.int16)
+        tensor_fp32 = tensor.to(torch.float32)
+        bits = tensor_fp32.view(torch.int32)
         mask = (1 << bit_position[0]) | (1 << bit_position[1])
         bits = bits ^ mask
-        flipped_tensor = bits.view(torch.bfloat16)
+        flipped_tensor = bits.view(torch.float32)
     return flipped_tensor
 
 
 def perform_bit_flip_neuron(tensor, bit_position):
     """Flip two bits of a neuron output element."""
     with torch.no_grad():
-        tensor_bf16 = tensor.to(torch.bfloat16)
-        bits = tensor_bf16.view(torch.int16)
+        tensor_fp32 = tensor.to(torch.float32)
+        bits = tensor_fp32.view(torch.int32)
         mask = (1 << bit_position[0]) | (1 << bit_position[1])
         bits = bits ^ mask
-        flipped_tensor = bits.view(torch.bfloat16)
+        flipped_tensor = bits.view(torch.float32)
     return flipped_tensor
 
 
 def perform_bit_flip_single(tensor, bit_position):
     """Flip a single bit of a neuron output element."""
     with torch.no_grad():
-        tensor_bf16 = tensor.to(torch.bfloat16)
-        bits = tensor_bf16.view(torch.int16)
+        tensor_fp32 = tensor.to(torch.float32)
+        bits = tensor_fp32.view(torch.int32)
         mask = (1 << bit_position)
         bits = bits ^ mask
-        flipped_tensor = bits.view(torch.bfloat16)
+        flipped_tensor = bits.view(torch.float32)
     return flipped_tensor
 
 
@@ -236,7 +236,7 @@ def main():
     parser.add_argument('--fault_mode', type=str, default='weight', choices=['weight', 'neuron', 'single'],
                         help='Fault injection mode: weight, neuron (double bit), or single (single bit)')
     parser.add_argument('--num_trials', type=int, default=1000, help='Number of bit flip trials per sample')
-    parser.add_argument('--num_samples', type=int, default=10, help='Number of dataset samples to evaluate')
+    parser.add_argument('--num_samples', type=int, default=30, help='Number of dataset samples to evaluate')
     args = parser.parse_args()
     fault_mode = args.fault_mode
     num_trials = args.num_trials
@@ -270,7 +270,7 @@ def main():
     tokenizer.padding_side = 'left'
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=torch.bfloat16,
+        torch_dtype=torch.float32,
     )
     model.resize_token_embeddings(len(tokenizer))
     model.to(device)
@@ -353,15 +353,15 @@ def main():
         if fault_mode == 'weight':
             x = random.randint(0, weight_tensor.shape[0] - 1)
             y = random.randint(0, weight_tensor.shape[1] - 1)
-            bit_position = random.sample(range(16), 2)
+            bit_position = random.sample(range(32), 2)
             original_weight_value = weight_tensor[x, y].clone()
             with torch.no_grad():
                 weight_tensor[x, y] = perform_bit_flip_weight(weight_tensor[x, y], bit_position)
         else:
             if fault_mode == 'neuron':
-                bit_position = random.sample(range(16), 2)
+                bit_position = random.sample(range(32), 2)
             elif fault_mode == 'single':
-                bit_position = random.randint(0, 15)
+                bit_position = random.randint(0, 31)
             token_position = random.randint(0, min_tokens - 1)
             if token_position == 0:
                 x = random.randint(0, min_seq_len - 1)
