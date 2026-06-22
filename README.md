@@ -165,7 +165,19 @@ summary to the console.
 
 ---
 
-## Part 3: Fault Models (5 min)
+## Part 3: Chain-of-Thought (2 min)
+
+`nocotFI.py` (in the repository root) runs the math task **without** chain-of-thought prompting,
+so you can compare CoT vs. no-CoT resilience against the GSM8K result from Part 2.
+Models: `falcon` (default), `qwen`.
+```
+cd ..
+python nocotFI.py --fault_mode neuron --model qwen --num_trials 1000
+```
+
+---
+
+## Part 4: Fault Models (5 min)
 
 The `--fault_mode` flag selects how and where faults are injected. The three modes map onto
 two fault classes:
@@ -186,17 +198,6 @@ python gsm8kFI.py --fault_mode weight --model falcon --num_trials 1000
 
 ---
 
-## Part 4: Chain-of-Thought (2 min)
-
-`nocotFI.py` (in the repository root) runs the math task **without** chain-of-thought prompting,
-so you can compare CoT vs. no-CoT resilience against the GSM8K result from Part 2.
-Models: `falcon` (default), `qwen`.
-```
-cd ..
-python nocotFI.py --fault_mode neuron --model qwen --num_trials 1000
-```
-
----
 
 ## Part 5: Generation Mode — Beam vs. Greedy (2 min)
 
