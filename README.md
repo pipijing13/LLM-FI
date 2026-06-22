@@ -151,7 +151,7 @@ summary to the console.
 
    **GPU version:**
    ```
-   python gsm8kFI.py --fault_mode weight --model qwen --num_trials 5
+   python gsm8kFI.py --fault_mode weight --model qwen --num_trials 2
    ```
 
    **CPU version:**
