@@ -53,7 +53,7 @@ pip install -r requirements_cpu.txt
 ```
 
 ## Citation
-if you use this tool for your research, please cite our SC 25 paper
+if you use this tool for your research, please cite our SC25 paper:
 ```
 @inproceedings{sun2025demystifying,
   title={Demystifying the resilience of large language model inference: An end-to-end perspective},
