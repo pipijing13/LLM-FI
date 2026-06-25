@@ -6,18 +6,6 @@ and generation settings. Both **GPU** and **CPU** versions are provided.
 
 Repository: https://github.com/pipijing13/LLM-FI
 
-## Citation
-if you use this tool for your research, pleas cite our SC 25 paper
-```
-@inproceedings{sun2025demystifying,
-  title={Demystifying the resilience of large language model inference: An end-to-end perspective},
-  author={Sun, Yu and Coalson, Zachary and Chen, Shiyang and Liu, Hang and Zhang, Zhao and Hong, Sanghyun and Fang, Bo and Yang, Lishan},
-  booktitle={Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
-  pages={1127--1144},
-  year={2025}
-}
-```
-
 ---
 
 ## Setup (10 min)
@@ -64,6 +52,17 @@ python -m pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 \
 pip install -r requirements_cpu.txt
 ```
 
+## Citation
+if you use this tool for your research, please cite our SC 25 paper
+```
+@inproceedings{sun2025demystifying,
+  title={Demystifying the resilience of large language model inference: An end-to-end perspective},
+  author={Sun, Yu and Coalson, Zachary and Chen, Shiyang and Liu, Hang and Zhang, Zhao and Hong, Sanghyun and Fang, Bo and Yang, Lishan},
+  booktitle={Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+  pages={1127--1144},
+  year={2025}
+}
+```
 
 ---
 
